@@ -2,18 +2,88 @@
 <html>
 <head>
     <title>ResumeIQ</title>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container{
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 600px;
+        }
+
+        h1{
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        h3{
+            color: #444;
+        }
+
+        p{
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        input[type="file"]{
+            margin: 15px;
+        }
+
+        button{
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover{
+            background-color: #1d4ed8;
+        }
+
+    </style>
+
 </head>
+
 <body>
 
-    <h1>ResumeIQ</h1>
+    <div class="container">
 
-    <h3>Intelligent Resume & Job Match Analyzer</h3>
+        <h1>ResumeIQ</h1>
 
-    <form>
-        <input type="file">
-        <br><br>
-        <button type="submit">Upload Resume</button>
-    </form>
+        <h3>AI-Powered Resume & Job Match Analyzer</h3>
+
+        <p>
+            Upload your resume to discover skill gaps,
+            match scores, and personalized career insights.
+        </p>
+
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+
+            <input type="file" name="resume">
+
+            <br><br>
+
+            <button type="submit">Upload Resume</button>
+
+        </form>
+
+    </div>
 
 </body>
 </html>
