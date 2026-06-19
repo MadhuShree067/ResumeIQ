@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request
+from parser import extract_text
+from extractor import extract_skills
 import os
 
 app = Flask(__name__)
@@ -19,6 +21,8 @@ def upload():
 
     if file:
 
+        os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+
         filepath = os.path.join(
             app.config["UPLOAD_FOLDER"],
             file.filename
@@ -26,10 +30,41 @@ def upload():
 
         file.save(filepath)
 
-        return render_template(
-            "success.html",
-            filename=file.filename
-        )
+        # Extract text from PDF
+        resume_text = extract_text(filepath)
+
+        # Extract skills
+        skills = extract_skills(resume_text)
+
+        # Calculate score
+        score = len(skills) * 10
+
+        if score > 100:
+            score = 100
+
+        return f"""
+        <html>
+        <body style="font-family: Arial; padding: 20px;">
+
+        <h1>Resume Analysis</h1>
+
+        <h2>Resume Score: {score}/100</h2>
+
+        <h2>Skills Found:</h2>
+
+        <ul>
+        {''.join([f'<li>{skill}</li>' for skill in skills])}
+        </ul>
+
+        <hr>
+
+        <h2>Resume Text:</h2>
+
+        <pre>{resume_text}</pre>
+
+        </body>
+        </html>
+        """
 
     return "No file selected"
 
