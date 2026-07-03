@@ -1,36 +1,91 @@
 # ResumeIQ Progress
 
-## Milestone 1 Completed (19 June 2026)
+---
 
-### Features Completed
+# ✅ Milestone 1 Completed (19 June 2026)
 
-* Resume Upload
-* PDF Text Extraction
-* Skill Extraction
-* Resume Score Calculation
-* GitHub Integration
+## Features Completed
 
-### Technologies Used
+- Resume Upload
+- PDF Text Extraction
+- Skill Extraction
+- Resume Score Calculation
+- GitHub Integration
 
-* Python
-* Flask
-* PDFPlumber
-* HTML
-* CSS
-* Git & GitHub
+## Technologies Used
 
-### Current Status
+- Python
+- Flask
+- PDFPlumber
+- HTML
+- CSS
+- Git & GitHub
 
-Project Completion: 50-60%
+---
 
-### Next Features
+# ✅ Milestone 2 Completed (03 July 2026)
 
-* Job Description Input
-* Job Match Percentage
-* Missing Skills Detection
-* Better UI Design
-* Database Storage
+## New Features Added
 
-### GitHub Commit
+- Professional Homepage UI
+- Job Description Input
+- Resume Dashboard
+- Resume Skills Display
+- Job Match Percentage
+- Matched Skills Detection
+- Missing Skills Detection
+- Recommendation Section
+- Modern Dashboard UI with Skill Badges
+- Responsive Layout
+
+## Technologies Added
+
+- Jinja2 Templates
+- CSS Dashboard Styling
+- Flask Template Rendering
+
+## Current Project Status
+
+**Project Completion:** 70%
+
+---
+
+# 🚧 Milestone 3 (In Progress)
+
+### Planned Features
+
+- ATS Resume Score
+- Circular Progress Indicators
+- PDF Report Download
+- Smarter Resume Scoring
+- Better Recommendations
+- Dashboard Improvements
+- Project Cleanup
+
+---
+
+# 🔮 Future Scope
+
+- AI Resume Suggestions
+- AI Resume Improvement Tips
+- Gemini/OpenAI Integration
+- Resume History
+- Multiple Resume Comparison
+- Database Integration
+- User Authentication
+
+---
+
+# GitHub Milestones
+
+### Commit 1
+
+Initial Project Setup
+
+### Commit 2
 
 Added PDF extraction, skill extraction and resume scoring
+
+### Commit 3
+
+Professional Resume Dashboard with Job Matching and Recommendations
