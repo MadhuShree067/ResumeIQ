@@ -18,55 +18,67 @@ def home():
 def upload():
 
     file = request.files["resume"]
+    job_description = request.form["job_description"]
 
-    if file:
+    if not file:
+        return "No file selected"
 
-        os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
+    os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 
-        filepath = os.path.join(
-            app.config["UPLOAD_FOLDER"],
-            file.filename
+    filepath = os.path.join(
+        app.config["UPLOAD_FOLDER"],
+        file.filename
+    )
+
+    file.save(filepath)
+
+    # Extract resume text
+    resume_text = extract_text(filepath)
+
+    # Extract skills
+    resume_skills = extract_skills(resume_text)
+    job_skills = extract_skills(job_description)
+
+    # Resume Score
+    score = min(len(resume_skills) * 10, 100)
+
+    # Matching Skills
+    matched_skills = [
+        skill for skill in resume_skills
+        if skill in job_skills
+    ]
+
+    # Missing Skills
+    missing_skills = [
+        skill for skill in job_skills
+        if skill not in resume_skills
+    ]
+
+    # Match Score
+    if len(job_skills) > 0:
+        match_score = int(
+            (len(matched_skills) / len(job_skills)) * 100
+        )
+    else:
+        match_score = 0
+
+    # Recommendations
+    recommendations = []
+
+    for skill in missing_skills:
+        recommendations.append(
+            f"Learn {skill.title()} to improve your profile."
         )
 
-        file.save(filepath)
-
-        # Extract text from PDF
-        resume_text = extract_text(filepath)
-
-        # Extract skills
-        skills = extract_skills(resume_text)
-
-        # Calculate score
-        score = len(skills) * 10
-
-        if score > 100:
-            score = 100
-
-        return f"""
-        <html>
-        <body style="font-family: Arial; padding: 20px;">
-
-        <h1>Resume Analysis</h1>
-
-        <h2>Resume Score: {score}/100</h2>
-
-        <h2>Skills Found:</h2>
-
-        <ul>
-        {''.join([f'<li>{skill}</li>' for skill in skills])}
-        </ul>
-
-        <hr>
-
-        <h2>Resume Text:</h2>
-
-        <pre>{resume_text}</pre>
-
-        </body>
-        </html>
-        """
-
-    return "No file selected"
+    return render_template(
+        "result.html",
+        score=score,
+        match_score=match_score,
+        resume_skills=resume_skills,
+        matched_skills=matched_skills,
+        missing_skills=missing_skills,
+        recommendations=recommendations
+    )
 
 
 if __name__ == "__main__":
